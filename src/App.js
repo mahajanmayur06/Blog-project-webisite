@@ -4,6 +4,7 @@ import Home from './Home';
 import Nav from './Nav';
 import About from './About';
 import NewPost from './NewPost';
+import EditPost from './editPost';
 import PostPage from './PostPage';
 import Missing from './Missing';
 
@@ -11,7 +12,6 @@ import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {format} from 'date-fns';
 import api from './api/posts'
-
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -23,7 +23,7 @@ function App() {
     const [editBody, setEditBody] = useState('')
     const navigate = useNavigate();
 
-    useEffect(() => {
+    useEffect(async () => {
         const fetchPosts = async () => {
             try {
                 const response = await api.get('/posts')
@@ -43,12 +43,14 @@ function App() {
         }
         fetchPosts();
     }, [])
-    useEffect (() => {
-        const filterPosts = posts.filter(post =>
-            ((post.body).toLowerCase()).includes(search.toLowerCase()) || ((post.title).toLowerCase()).includes(search.toLowerCase())
-        )
-            setSearchResult(filterPosts.reverse());
-    },[posts, search])
+    
+    useEffect(() => {
+        const filteredResults = posts.filter((post) =>
+          ((post.body)?.toLowerCase())?.includes(search.toLowerCase())
+          || ((post.title)?.toLowerCase())?.includes(search.toLowerCase()));
+    
+        setSearchResult(filteredResults.reverse());
+      }, [posts, search])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -68,16 +70,16 @@ function App() {
     };
 
     const handleEdit = async (id) => {
-        const datetime = format(new Date(), 'MMMM dd, yyyy pp')
-        const updatedPost = {id, title : postTitle, datetime, body : postBody}
+        const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+        const updatedPost = { id, title: editTitle, datetime, body: editBody };
         try {
-            const response = await api.put(`/posts/${id}`);
-            setPosts(posts.map(post => post.id === id ? { ...response.data }: post))
-            setEditTitle('')
-            setEditBody('')
-            navigate('/')
-        } catch (err){
-            console.log(`Error : ${err.message}`);
+            const response = await api.put(`/posts/${id}`, updatedPost);
+            setPosts(posts.map(post => post.id === id ? { ...response.data } : post));
+            setEditTitle('');
+            setEditBody('');
+            navigate('/');
+        } catch (err) {
+            console.log(`Error: ${err.message}`);
         }
     }
 
@@ -88,7 +90,7 @@ function App() {
             setPosts(updatedPosts);
             navigate('/');
         } catch (err){
-
+            console.log(err.message);
         }
     };
     
@@ -113,6 +115,16 @@ function App() {
                         setPostTitle = {setPostTitle}
                         postBody = {postBody}
                         setPostBody = {setPostBody}
+                    />
+                } />
+                <Route path='/edit/:id' element={
+                    <EditPost
+                        posts={posts}
+                        handleEdit = {handleEdit}
+                        editTitle = {editTitle}
+                        setEditTitle = {setEditTitle}
+                        editBody = {editBody}
+                        setEditBody = {setEditBody}
                     />
                 } />
                 <Route path='/post/:id' element={
