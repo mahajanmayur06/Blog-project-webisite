@@ -1,7 +1,7 @@
 
 const NewPost = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody}) => {
   return (
-        <main>
+        <main className="NewPost">
             <h2>NewPost</h2>
             <form className="newPostForm" onSubmit={handleSubmit}>
                 <label htmlFor="postTitle">Title:</label>
