@@ -9,20 +9,32 @@
     {
       "id": "2",
       "title": "Second post",
-      "datetime": "February 06, 2024 6:19:27 PM",
-      "body": "Lorem is not miine friend"
+      "datetime": "February 06, 2024 9:19:53 PM",
+      "body": "Lorem is not mine friend"
     },
     {
       "id": "3",
       "title": "Number Three",
-      "datetime": "February 06, 2024 6:18:47 PM",
+      "datetime": "February 06, 2024 9:14:24 PM",
       "body": "Lorem is one of my favourite friend and\n"
     },
     {
-      "id": "31",
-      "title": "5th post ",
-      "datetime": "February 06, 2024 6:20:34 PM",
-      "body": "I am Shreya"
+      "id": "4",
+      "title": "Aksharyatra",
+      "datetime": "February 06, 2024 9:19:36 PM",
+      "body": "Chandrakant Chavan used to write articles in Marathi language on website aksharyatra.com"
+    },
+    {
+      "id": 5,
+      "title": "Person",
+      "datetime": "February 07, 2024 10:27:11 PM",
+      "body": "I know a man who is mine friend."
+    },
+    {
+      "id": 6,
+      "title": "Love",
+      "datetime": "February 07, 2024 10:27:44 PM",
+      "body": "Love is unconditional. When it comes to us our soul gets purified."
     }
   ]
 }
